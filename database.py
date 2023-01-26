@@ -13,11 +13,11 @@ def add_new(db, cursor, data):
         list: returnes True in case of success
     """
     isExist = cursor.execute(f"SELECT * FROM data WHERE webname = '{data[0]}' ").fetchall()
-    if isExist != []:
+    if isExist == []:
         data = encryption(cursor, data)
         cursor.execute("INSERT INTO data VALUES (?,?,?,?)", data)
         db.commit()
-        return 
+        return True
     return False
 
 
